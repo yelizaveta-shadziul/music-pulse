@@ -1,6 +1,6 @@
-# 🎵 Music Pulse — Real-Time Music Analytics
+# Music Pulse — Real-Time Music Analytics
 
-> A real-time music streaming analytics system built with Apache Kafka, Spark, and Streamlit
+A real-time music streaming analytics system built with Apache Kafka, Spark Structured Streaming, PostgreSQL, and Streamlit.
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
 ![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-7.5.0-black?logo=apachekafka)
@@ -11,21 +11,20 @@
 
 ---
 
-## 📖 About
+## About
 
-**Music Pulse** is a data engineering project that demonstrates real-time streaming analytics. The system collects data about trending tracks from the Last.fm API, streams it through Apache Kafka, processes it with Spark Structured Streaming, and visualizes live metrics on a Streamlit dashboard.
+Music Pulse collects data about trending tracks from the Last.fm API, streams it through Apache Kafka, processes it with Spark Structured Streaming, and displays live metrics on a Streamlit dashboard — updating every 10 seconds.
 
-### What the dashboard shows
-
-- 🎵 **Average BPM** — current average tempo of trending tracks
-- ⚡ **Energy** — average energy level of tracks
-- 😊 **Mood Index** — mood score based on valence
-- 📈 **BPM over time** — live chart of tempo changes
-- 🌡️ **Mood indicator** — visual mood progress bar
+**Dashboard metrics:**
+- Average BPM — current tempo of trending tracks
+- Energy — average energy level
+- Mood Index — mood score based on valence
+- BPM over time — live chart
+- Mood indicator — visual progress bar
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 Last.fm API → Kafka Producer → Apache Kafka → Spark Streaming → PostgreSQL → Streamlit
@@ -38,35 +37,35 @@ Last.fm API → Kafka Producer → Apache Kafka → Spark Streaming → PostgreS
 | Processing | Apache Spark 3.5.1 | Sliding window aggregation |
 | Storage | PostgreSQL 16 | Table `music_metrics` |
 | Visualization | Streamlit | Updates every 10 seconds |
-| Infrastructure | Docker Compose | Kafka, Spark, PostgreSQL in containers |
+| Infrastructure | Docker Compose | All services in containers |
 
 ---
 
-## 📁 Project structure
+## Project structure
 
 ```
 music-pulse/
 ├── docker-compose.yml        # Infrastructure (Kafka, Spark, PostgreSQL)
 ├── .env                      # Secret keys (not uploaded to GitHub)
 ├── .env.example              # Example env file
-├── .gitignore                # Files to ignore
+├── .gitignore
 ├── producer/
 │   ├── producer.py           # Kafka Producer — fetches data from Last.fm
-│   └── requirements.txt      # Producer dependencies
+│   └── requirements.txt
 ├── spark/
-│   └── spark_job.py          # Spark Streaming Job — processes data
+│   └── spark_job.py          # Spark Streaming Job
 └── dashboard/
     ├── app.py                # Streamlit dashboard
-    └── requirements.txt      # Dashboard dependencies
+    └── requirements.txt
 ```
 
 ---
 
-## 🚀 Getting started
+## Getting started
 
 ### Prerequisites
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop) (at least 4 GB RAM)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) — at least 4 GB RAM
 - [Python 3.11+](https://www.python.org/downloads/)
 - [Java 17](https://adoptium.net/)
 - A [Last.fm API key](https://www.last.fm/api/account/create)
@@ -74,7 +73,7 @@ music-pulse/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/music-pulse.git
+git clone https://github.com/yelizaveta-shadziul/music-pulse.git
 cd music-pulse
 ```
 
@@ -84,7 +83,7 @@ cd music-pulse
 cp .env.example .env
 ```
 
-Open `.env` and fill in your keys:
+Open `.env` and add your Last.fm API key:
 
 ```env
 LASTFM_API_KEY=your_lastfm_api_key_here
@@ -111,7 +110,7 @@ pip install streamlit psycopg2-binary pandas
 
 ### 6. Run all components
 
-Open **3 separate terminals**:
+Open three separate terminals:
 
 **Terminal 1 — Producer:**
 ```bash
@@ -131,12 +130,11 @@ streamlit run dashboard/app.py
 
 ### 7. Open the dashboard
 
-Go to [http://localhost:8501](http://localhost:8501) in your browser.
-Wait 2-3 minutes for Spark to accumulate the first data points.
+Go to [http://localhost:8501](http://localhost:8501) and wait 2-3 minutes for Spark to accumulate the first data.
 
 ---
 
-## 🐛 Common issues
+## Common issues
 
 | Problem | Solution |
 |---------|----------|
@@ -147,7 +145,7 @@ Wait 2-3 minutes for Spark to accumulate the first data points.
 
 ---
 
-## 📊 Sample message
+## Sample Kafka message
 
 ```json
 {
@@ -163,11 +161,11 @@ Wait 2-3 minutes for Spark to accumulate the first data points.
 
 ---
 
-## 🛠️ Tech stack
+## Tech stack
 
-- **[Apache Kafka](https://kafka.apache.org/)** — distributed message broker
-- **[Apache Spark](https://spark.apache.org/)** — streaming data processing engine
-- **[PostgreSQL](https://www.postgresql.org/)** — relational database
-- **[Streamlit](https://streamlit.io/)** — Python dashboard framework
-- **[pylast](https://github.com/pylast/pylast)** — Python client for Last.fm API
-- **[Docker Compose](https://docs.docker.com/compose/)** — container orchestration
+- [Apache Kafka](https://kafka.apache.org/) — distributed message broker
+- [Apache Spark](https://spark.apache.org/) — streaming data processing engine
+- [PostgreSQL](https://www.postgresql.org/) — relational database
+- [Streamlit](https://streamlit.io/) — Python dashboard framework
+- [pylast](https://github.com/pylast/pylast) — Python client for Last.fm API
+- [Docker Compose](https://docs.docker.com/compose/) — container orchestration
