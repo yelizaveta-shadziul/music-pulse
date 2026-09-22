@@ -67,7 +67,6 @@ music-pulse/
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) — at least 4 GB RAM
 - [Python 3.11+](https://www.python.org/downloads/)
-- [Java 17](https://adoptium.net/)
 - A [Last.fm API key](https://www.last.fm/api/account/create)
 
 ### 1. Clone the repository
